@@ -4,61 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harjutus 5</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<h1>Harjutus 5.1</h1>
-<?php
-$tudrukud = ["Sofia", "Laura", "Emma", "Marta", "Anette", "Eliise", "Sandra", "Kertu", "Mia"];
+  <h1>Harjutus 5.1</h1>
+    <?php
+    function tervitus() {
+        return "Tere päiksekesekene!";
+    }
 
-sort($tudrukud);
+    echo tervitus();
+  ?>
+  <hr>
 
-echo "<h3>Kogu nimekiri (sorteeritud):</h3>";
-foreach ($tudrukud as $nimi) {
-    echo $nimi . "<br>";
-}
+  <h1>Harjutus 5.2</h1>
+    <?php
+    function UudiskirjaVorm() {
+        return '
+        <form class="row g-3">
+          <div class="col-auto">
+            <input type="email" class="form-control" placeholder="Sinu email" required>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Liitu uudiskirjaga</button>
+          </div>
+        </form>';
+    }
 
-echo "<h3>Esimesed 3 nime:</h3>";
-$esimesed_kolm = array_slice($tudrukud, 0, 3);
-echo implode(", ", $esimesed_kolm) . "<br>";
+    echo UudiskirjaVorm();
+    ?>
+  <hr>
 
-echo "<h3>Viimane nimi nimekirjas:</h3>";
-$viimane_nimi = $tudrukud[count($tudrukud) - 1]; 
-echo $viimane_nimi . "<br>";
+  <h1>Harjutus 5.3</h1>
+    <?php
+      function looKasutajaAndmed($nimi) {
+      // Väikesed tähed
+      $kasutaja = strtolower($nimi);
+    
+      // Email
+      $email = $kasutaja . "@hkhk.edu.ee";
+    
+      // Suvaline 7-kohaline kood (tähed ja numbrid)
+      $symbolid = 'abcdefghijklmnopqrstuvwxyz0123456789';
+      $kood = substr(str_shuffle($symbolid), 0, 7);
+    
+      return [
+          'kasutaja' => $kasutaja,
+          'email' => $email,
+          'kood' => $kood
+      ];
+      }
 
-echo "<h3>Üks suvaline nimi nimekirjast:</h3>";
-$suvaline_indeks = rand(0, count($tudrukud) - 1);
-echo "Suvaline valitud nimi on: <strong>" . $tudrukud[$suvaline_indeks] . "</strong> (indeksiga $suvaline_indeks)<br>";
-?>
-<hr>
+      $andmed = looKasutajaAndmed("MariMaasikas");
+      echo "Kasutaja: " . $andmed['kasutaja'] . "<br>Email: " . $andmed['email'] . "<br>Kood: " . $andmed['kood'];
+    ?>
+  <hr>
 
-<h1>Harjutus 5.2</h1>
+  <h1>Harjutus 5.4</h1>
+    <?php
 
-<hr>
+    ?>
+  <hr>
 
-<h1>Harjutus 5.3</h1>
+  <h1>Harjutus 5.5</h1>
+    <?php
 
-<hr>
+    ?>
+  <hr>
 
-<h1>Harjutus 5.4</h1>
+  <h1>Harjutus 5.6</h1>
+    <?php
 
-<hr>
+    ?>
+  <hr>
 
-<h1>Harjutus 5.5</h1>
+  <h1>Harjutus 5.7</h1>
+    <?php
 
-<hr>
+    ?>
+  <hr>
 
-<h1>Harjutus 5.6</h1>
+  <h1>Harjutus 5.8</h1>
+    <?php
 
-<hr>
-
-<h1>Harjutus 5.7</h1>
-
-<hr>
-
-<h1>Harjutus 5.8</h1>
-
-<hr>
+    ?>
+  <hr>
 
 </body>
 </html>
