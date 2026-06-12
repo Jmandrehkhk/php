@@ -3,147 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harjutus 4
-    </title>
+    <title>Harjutus 4</title>
 </head>
 <body>
-    <H1>Harjutus 4.1</H1>
-
-    <form method="get" action="">
-        <input type="hidden" name="tegevus" value="jagamine">
-        Arv 1: <input type="number" name="jagatav" value="<?php echo isset($_GET['jagatav']) ? $_GET['jagatav'] : ''; ?>">
-        Arv 2: <input type="number" name="jagaja" value="<?php echo isset($_GET['jagaja']) ? $_GET['jagaja'] : ''; ?>">
-        <input type="submit" value="Jaga">
+        <form action="">
+        Täisarv 1 <input type="number" name="var1"><br>
+        Täisarv 2 <input type="number" name="var2"><br>
+        <br>
+        Kasutaja1 Vanus <input type="number" name="kasutaja1_vanus"><br>
+        Kasutaja2 Vanus <input type="number" name="kasutaja2_vanus"><br>
+        <br>
+        Kujundi a pikkus <input type="number" name="kujund_a_pikkus"><br>
+        Kujundi b pikkus <input type="number" name="kujund_b_pikkus"><br>
+        <br>
+        Juubel <input type="number" name="juubel"><br>
+        <br>
+        Hinne <input type="number" name="hinne"><br>
+        <input type="submit" value=saada>
     </form>
     <?php
-    if (isset($_GET['tegevus']) && $_GET['tegevus'] == 'jagamine') {
-        // Kontroll, et väljad poleks tühjad
-        if ($_GET['jagatav'] !== '' && $_GET['jagaja'] !== '') {
-            $arv1 = (float)$_GET['jagatav'];
-            $arv2 = (float)$_GET['jagaja'];
 
-            if ($arv2 == 0) {
-                echo "<div class='veateade'>Hoiatus: Nulliga ei saa jagada!</div>";
-            } else {
-                $tulemus = $arv1 / $arv2;
-                echo "<div class='tulemus'>Vastus: $arv1 / $arv2 = $tulemus</div>";
-            }
+    $var1 = $_GET["var1"];
+    $var2 = $_GET["var2"];
+    $kasutaja1_vanus = $_GET["kasutaja1_vanus"];
+    $kasutaja2_vanus = $_GET["kasutaja2_vanus"];
+    $kujund_a_pikkus = $_GET["kujund_a_pikkus"];
+    $kujund_b_pikkus = $_GET["kujund_b_pikkus"];
+    $juubel = $_GET["juubel"];
+    $hinne = $_GET["hinne"];
+    switch(true) {
+        case !$var1:
+            echo "var1 missing! <br>";
+            break;
+        case !$var2: 
+            echo "var2 missing! <br>";
+            break;
+        default:
+            echo $var1." / ".$var2 ." = ". $var1/$var2."<br>";
+    }
+    if($kasutaja1_vanus==$kasutaja2_vanus) {
+        echo "Kasutaja1 ja Kasutaja2 on ühevanused <br>";
         }
+    elseif($kasutaja1_vanus<$kasutaja2_vanus) {
+        echo "Kasutaja2 on vanem kui Kasutaja1 <br>";
+
+        }
+    elseif($kasutaja2_vanus<$kasutaja1_vanus) {
+        echo "Kasutaja1 on vanem kui Kasutaja2 <br>";
+    }
+    else {
+        echo "Vanused puuduvad <br>";
+    }
+    echo $kujund_a_pikkus." ".$kujund_b_pikkus." <br>";
+    
+    if($kujund_a_pikkus==$kujund_b_pikkus) {
+        echo "Kujund on ruut <br>";
+        }
+    elseif($kujund_a_pikkus<$kujund_b_pikkus) {
+        echo "Kujund on Ristkülik <br>";
+
+        }
+    elseif($kujund_b_pikkus<$kujund_a_pikkus) {
+        echo "Kujund on Ristkülik <br>";
+        }
+    else {
+        echo "andmed puuduvad <br>";
+    }
+    echo '<svg width="'.$kujund_a_pikkus.'" height="'.$kujund_b_pikkus.'">
+            <rect width="'.$kujund_a_pikkus.'" height="'.$kujund_b_pikkus.'" style="fill:rgb(0,0,255);" />
+        </svg>';
+    if($juubel==25) {
+        echo "Juubel!<br>";
+        }
+    elseif($juubel== 50) {
+        echo "Juubel!<br>";
+    }
+    elseif($juubel== 75) {
+        echo "Juubel!<br>";
+    }
+    elseif($juubel== 100) {
+        echo "Juubel!<br>";
+    }
+    else{
+    }
+    switch(true) {
+        case (!$hinne):
+            echo "Sisesta oma punktid!";
+            break;
+        case ($hinne>10):
+            echo "SUPER!";
+            break;
+        case ($hinne<9&$hinne>4):
+            echo "TEHTUD";
+            break;
+        case ($hinne<5):
+            echo "KASIN!";
+            break;
     }
     ?>
-    <hr>
-
-    <H1>Harjutus 4.2</H1>
-    <form method="get" action="">
-        <input type="hidden" name="tegevus" value="vanus">
-        Esimese isiku vanus: <input type="number" name="vanus1" value="<?php echo isset($_GET['vanus1']) ? $_GET['vanus1'] : ''; ?>">
-        Teise isiku vanus: <input type="number" name="vanus2" value="<?php echo isset($_GET['vanus2']) ? $_GET['vanus2'] : ''; ?>">
-        <input type="submit" value="Võrdle vanuseid">
-    </form>
-    <?php
-    if (isset($_GET['tegevus']) && $_GET['tegevus'] == 'vanus') {
-        // Kood ei käivitu, kui kumbki lahter on tühi
-        if ($_GET['vanus1'] !== '' && $_GET['vanus2'] !== '') {
-            $v1 = (int)$_GET['vanus1'];
-            $v2 = (int)$_GET['vanus2'];
-
-            if ($v1 > $v2) {
-                echo "<div class='tulemus'>Esimene isik on vanem.</div>";
-            } elseif ($v2 > $v1) {
-                echo "<div class='tulemus'>Teine isik on vanem.</div>";
-            } else {
-                echo "<div class='tulemus'>Isikud on ühevanused.</div>";
-            }
-        }
-    }
-    ?>
-    <hr>
-
-    <H1>Harjutus 4.3 ja 4</H1>
-    <form method="get" action="">
-        <input type="hidden" name="tegevus" value="kujund">
-        Külg A (px): <input type="number" name="kylgA" min="1" value="<?php echo isset($_GET['kylgA']) ? $_GET['kylgA'] : ''; ?>">
-        Külg B (px): <input type="number" name="kylgB" min="1" value="<?php echo isset($_GET['kylgB']) ? $_GET['kylgB'] : ''; ?>">
-        <input type="submit" value="Kontrolli ja joonista">
-    </form>
-    <?php
-    if (isset($_GET['tegevus']) && $_GET['tegevus'] == 'kujund') {
-        if ($_GET['kylgA'] !== '' && $_GET['kylgB'] !== '') {
-            $a = (int)$_GET['kylgA'];
-            $b = (int)$_GET['kylgB'];
-
-            // 3. Ülesande loogika (otsus)
-            if ($a == $b) {
-                $tyyp = "ruut";
-                echo "<div class='tulemus'>Tegemist on <strong>ruuduga</strong>.</div>";
-            } else {
-                $tyyp = "ristkülik";
-                echo "<div class='tulemus'>Tegemist on <strong>ristkülikuga</strong>.</div>";
-            }
-
-            // 4. Ülesande loogika (visuaalne kuvamine CSS-iga)
-            echo "<h3>Kuvatud $tyyp:</h3>";
-            echo "<div style='width: {$a}px; height: {$b}px; background-color: #3498db; border: 2px solid #2980b9;'></div>";
-        }
-    }
-    ?>
-    <hr>
-
-    <H1>Harjutus 4.5</H1>
-    <form method="get" action="">
-        <input type="hidden" name="tegevus" value="juubel">
-        Sünniaasta: <input type="number" name="aasta" value="<?php echo isset($_GET['aasta']) ? $_GET['aasta'] : ''; ?>">
-        <input type="submit" value="Kontrolli juubelit">
-    </form>
-    <?php
-    if (isset($_GET['tegevus']) && $_GET['tegevus'] == 'juubel') {
-        if ($_GET['aasta'] !== '') {
-            $synniaasta = (int)$_GET['aasta'];
-            $praegune_aasta = 2026; // Kuna hetkel on aasta 2026
-            $vanus = $praegune_aasta - $synniaasta;
-
-            // Juubeliaastad on tavaliselt viiega jaguvad aastad (0, 5, 10, 15, 20...)
-            if ($vanus % 5 == 0) {
-                echo "<div class='tulemus'>Palju õnne! Sel aastal täitub/täitus sul $vanus aastat – see on JUUBEL!</div>";
-            } else {
-                echo "<div class='tulemus'>Sel aastal täitub/täitus sul $vanus aastat. Tegemist ei ole juubeliaastaga.</div>";
-            }
-        }
-    }
-    ?>
-    <hr>
-
-    <H1>Harjutus 4.6</H1>
-    <form method="get" action="">
-        <input type="hidden" name="tegevus" value="hinne">
-        Sisesta KT punktid: <input type="text" name="punktid" value="<?php echo isset($_GET['punktid']) ? $_GET['punktid'] : ''; ?>">
-        <input type="submit" value="Vaata hinnet">
-    </form>
-    <?php
-    if (isset($_GET['tegevus']) && $_GET['tegevus'] == 'hinne') {
-        $punktid = $_GET['punktid'];
-
-        // Kontroll, kas on tühi või pole number
-        if ($punktid === '' || !is_numeric($punktid)) {
-            echo "<div class='veateade'>SISESTA OMA PUNKTID!</div>";
-        } else {
-            $p = (float)$punktid;
-
-            // PHP-s saab switch-iga vahemikke kontrollida kasutades tingimust 'switch(true)'
-            switch (true) {
-                case ($p >= 10): 
-                    echo "<div class='tulemus'>SUPER!</div>";
-                    break;
-                case ($p >= 5 && $p <= 9): 
-                    echo "<div class='tulemus'>TEHTUD!</div>";
-                    break;
-                case ($p < 5): 
-                    echo "<div class='tulemus'>KASIN!</div>";
-                    break;
-            }
-        }
-    }
-    ?>
-    <hr>
 </body>
 </html>

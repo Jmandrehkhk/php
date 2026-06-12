@@ -3,50 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Harjutus 3</title>
 </head>
 <body>
-    <h1>Harjutus 3</h1>
-    
-    <h2>Trapetsi pindala</h2>
-    <form method="get" action="">
-        <input type="hidden" name="calc" value="trapets">
-        a: <input type="number" name="a" step="0.1" min="0.1" required><br>
-        b: <input type="number" name="b" step="0.1" min="0.1" required><br>
-        h: <input type="number" name="h" step="0.1" min="0.1" required><br><br>
-        <input type="submit" value="Arvuta trapets">
+    <form action="">
+        alumine pikkus <input type="number" name="alumine_pikkus"><br>
+        ülemine pikkus <input type="number" name="ulemine_pikkus"><br>
+        kõrgus <input type="number" name="korgus"><br>
+        vasak haar <input type="number" name="vasak_haar"><br>
+        parem haar <input type="number" name="parem_haar"><br>
+        <input type="submit" value=saada>
     </form>
-
-    <h2>Rombi ümbermõõt</h2>
-    <form method="get" action="">
-        <input type="hidden" name="calc" value="romb">
-        külg s: <input type="number" name="s" step="0.1" min="0.1" required><br><br>
-        <input type="submit" value="Arvuta romb">
-    </form>
-
-    <h2>Tulemus</h2>
-
     <?php
-    // FIX: Define the $valik variable by fetching 'calc' from the URL
-    $valik = isset($_GET['calc']) ? $_GET['calc'] : '';
 
-    if ($valik == 'trapets') {   
-        $a = isset($_GET['a']) ? (float)$_GET['a'] : 0;
-        $b = isset($_GET['b']) ? (float)$_GET['b'] : 0;
-        $h = isset($_GET['h']) ? (float)$_GET['h'] : 0;
-        $summa = $a + $b;
-        $trapetsPindala = ($summa / 2) * $h;
-        echo "<p>Trapetsi pindala on " . number_format($trapetsPindala, 1, '.', '') . ".</p>";
-    } 
-    elseif ($valik == 'romb') {
-        $s = isset($_GET['s']) ? (float)$_GET['s'] : 0;
-        $kordaja = 4;
-        $rombYmber = $kordaja * $s;
-        echo "<p>Rombi ümbermõõt on " . number_format($rombYmber, 1, '.', '') . ".</p>";
-    } 
-    else {
-        echo "<p>Täida üks vorm ja vajuta arvuta.</p>";
-    }
+    $a_pikkus = $_GET["alumine_pikkus"];
+    $u_pikkus = $_GET["ulemine_pikkus"];
+    $korgus = $_GET["korgus"];
+    $vasak_haar = $_GET["vasak_haar"];
+    $parem_haar = $_GET["parem_haar"];
+
+    $pindala = ($a_pikkus*$u_pikkus/2)*$korgus;
+    $umbermoot = $a_pikkus+$u_pikkus+$vasak_haar+$parem_haar;
+    printf("Trapetsi pindala on %.1f ja ümbermõõt %.1f", $pindala, $umbermoot)
     ?>
 </body>
 </html>
